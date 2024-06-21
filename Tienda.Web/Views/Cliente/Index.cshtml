@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Tienda.LogicaAplicacion.DTOs.ClienteDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="p-2">
+    <a asp-controller="Usuario" asp-action="Index" class="btn btn-danger">Atrás</a>
+</div>
+
+@if(ViewBag.Message != null)
+{
+    <div class="text-center alert-warning p-2">
+        @ViewBag.Message
+    </div>
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <form method="post" action="Cliente/BuscarPorNombreApellido">
+                <label for="opcion">Buscar por nombre/apellido</label>
+                <br>
+                <input type="text" id="nombreApellido" name="nombreApellido" placeholder="Nombre/Apellido" />
+                <input type="submit" value="Buscar" class="btn btn-primary"/>
+            </form>
+        </div>
+        <div class="col-6">
+            <form method="post" action="Cliente/BuscarPorMonto">
+                <label for="opcion">Buscar por monto </label>
+                <br>
+                <input type="text" id="valor" name="valor" placeholder="100" />
+                <input type="submit" value="Buscar" class="btn btn-primary"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="p-2">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Apellido
+                </th>
+                <th>
+                    RUT
+                </th>
+                <th>
+                    Razon Social
+                </th>
+                <th>
+                    Calle
+                </th>
+                <th>
+                    Numero
+                </th>
+                <th>
+                    Ciudad
+                </th>
+                <th>
+                    Distancia desde tienda
+                </th>  
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model!=null && Model.Count() != 0){           
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Apellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Rut)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RazonSocial)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Calle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Numero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ciudad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.distanciaDesdeTienda)
+                        </td>                        
+
+                    </tr>
+                }
+            } 
+            else
+            {
+                    <tr>
+                        <td colspan="6" class="text-center alert alert-danger">No hay clientes registrados</td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
